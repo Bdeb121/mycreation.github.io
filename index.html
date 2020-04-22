@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corona Live Update</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="shortcut icon" href="img/Corona.png" type="image/x-icon">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        body{
+            background: #fafafa;
+        }
+        .nav_style{
+            background: #F90;
+        }
+
+        .nav_style a{
+            Color: #FFF;
+        }
+    </style>
+</head>
+
+<body onload="fetch()">
+
+    <nav class="navbar navbar-expand-lg nav_style p-3">
+        <a class="navbar-brand pl-3" href="#">COVID-19</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto pr-5 text-capitalize">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="Corona India Update (DayWise).html">DateWise</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="Corona India Update (TesteWise).html">TesteWise</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="CoronaWorld.html">WorldWide</a>
+                </li>
+            </ul>
+         
+        </div>
+    </nav>
+
+    <!-- project done start -->
+
+   
+
+    <!-- project done end -->
+
+
+    <!-- About section start -->
+
+    <Section class="Corona_update container-fluid">
+        <div class="mb-3">
+            <h3 class="text-center text-uppercase pt-3"> COVID-19 LIVE UPDATES OF THE INDIA STATEWISE </h3>
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-striped text-center" id="tbval">
+                <tr>
+                    <th>Lastupdatedtime</th>
+                    <th>State/UT</th>
+                    <th>Confirmed</th>
+                    <th>Active</th>
+                    <th>Recovered</th>
+                    <th>Deaths</th>
+                </tr>
+            </table>
+
+        </div>
+    </Section>
+
+    <!-- About section end -->
+    <script>
+        function fetch(){
+            $.get("https://api.covid19india.org/data.json",
+ 
+                function (data){
+                    //console.log(data['Countries'].length);
+                    var tbval = document.getElementById('tbval');
+
+                    for(var i=1; i<(data['statewise'].length); i++){
+                        var x = tbval.insertRow();
+
+                        x.insertCell(0);
+                        tbval.rows[i].cells[0].innerHTML = data['statewise'][i]['lastupdatedtime'];
+                        tbval.rows[i].cells[0].style.background = '#7a4a91'
+                        tbval.rows[i].cells[0].style.color = '#FFF'
+
+                        x.insertCell(1);
+                        tbval.rows[i].cells[1].innerHTML = data['statewise'][i]['state'];
+                        tbval.rows[i].cells[1].style.background = '#4bb7d8'
+
+                        x.insertCell(2);
+                        tbval.rows[i].cells[2].innerHTML = data['statewise'][i]['confirmed'];
+                        tbval.rows[i].cells[2].style.background = '#4bb78d'
+
+                        x.insertCell(3);
+                        tbval.rows[i].cells[3].innerHTML = data['statewise'][i]['active'];
+                        tbval.rows[i].cells[3].style.background = '#f36e23'
+
+                        x.insertCell(4);
+                        tbval.rows[i].cells[4].innerHTML = data['statewise'][i]['recovered'];
+                        tbval.rows[i].cells[4].style.background = '#9cc850'
+
+                        x.insertCell(5);
+                        tbval.rows[i].cells[5].innerHTML = data['statewise'][i]['deaths'];
+                        tbval.rows[i].cells[5].style.background = '#f32384'
+
+
+
+                    }
+                }
+            )
+        }
+    </script>
+    
+   
+</body>
+</html>
+
+
